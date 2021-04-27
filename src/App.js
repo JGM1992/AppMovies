@@ -2,14 +2,14 @@ import React from "react"
 import Login from './components/login';
 import { useSelector } from "react-redux"
 import { selectUser } from "./redux/userSlice"
-import Home from "./components/home"
+import Menu from "./components/menu"
 
 function App() {
   const user = useSelector(selectUser);
 
   return (
         <React.Fragment>
-            { user ? <Home /> : <Login />}
+            { user ? <Menu /> : <Login />}
         </React.Fragment>
     )
 }

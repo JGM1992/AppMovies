@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { APIURL } from '../services/apiUrl';
 import Axios from 'axios';
 import { Container, Row, Carousel, Col, Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 export default function Home() {
 
     const token = localStorage.getItem("token")
-    const usuario = localStorage.getItem("nombre")
-    const apellidos = localStorage.getItem("apellidos")
     const [user, setUser] = useState([])
     const [didMount, setDidMount] = useState(false);
     const [estrenos, setEstrenos] = useState([])
@@ -109,7 +108,7 @@ export default function Home() {
         return () => setDidMount(false);
     }, [])
     const BaseUrl = localStorage.getItem("BaseUrl")
-    console.log(BaseUrl)
+    //console.log(BaseUrl)
     // const estrenos = []
     // estrenos.push(JSON.parse(localStorage.getItem("Estrenos")))
     console.log(populares)
@@ -118,11 +117,8 @@ export default function Home() {
     }
 
     return (
-        <>
-            <nav className="navbar navbar-dark bg-dark">
-                <span className="text-white h4">bienvenido {usuario + " " + apellidos}</span>
-            </nav>
 
+        <>
             <Carousel>
 
                 {
@@ -130,7 +126,7 @@ export default function Home() {
 
                         < Carousel.Item key={index} >
                             <img
-                                className="d-block w-100 h-20"
+                                className="d-block w-100"
                                 src={`${BaseUrl}${item.backdrop_path}`}
                             />
                             <Carousel.Caption>
@@ -143,7 +139,6 @@ export default function Home() {
             </Carousel>
             <div className="container">
                 <div className="row">
-
                     {
                         populares.map((item, index) =>
                             <div className="col-4">
@@ -152,14 +147,13 @@ export default function Home() {
                                     <div className="card-body">
                                         <h5 className="card-title">{item.original_title}</h5>
                                         <p className="card-text">{item.overview}</p>
-                                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                                        <Link className="btn btn-primary btn-block text-bold"
+                                            to={`/detallePelicula/${item.id}`}>Ver detalles...</Link>
                                     </div>
                                 </div>
                             </div>
                         )
                     }
-
-
                 </div>
             </div>
 
